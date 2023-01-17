@@ -1,13 +1,12 @@
-import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import type { CartCardProps } from "../cart-card/cart-card";
+import { component$, useContext, useStylesScoped$ } from "@builder.io/qwik";
+import { CartContext } from "~/root";
 import CartCard from "../cart-card/cart-card";
 import styles from './cart.css?inline'
 
-export interface CartProps{
-    cart : Array<CartCardProps>
-}
 
-export default component$(({cart} : CartProps) => {
+export default component$(() => {
+    const cartContext = useContext(CartContext)
+    const cart = cartContext.value
     useStylesScoped$(styles)
 
     const totalPrice = cart.map(({item, count}) => (item.price * count)).reduce((partialSum:number, a:number) => partialSum + a, 0);

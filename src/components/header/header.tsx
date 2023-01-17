@@ -1,32 +1,24 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, useContext, useStylesScoped$ } from '@builder.io/qwik';
+import { CartContext } from '~/root';
 import { QwikLogo } from '../icons/qwik';
 import styles from './header.css?inline';
-
+import { Link } from '@builder.io/qwik-city'
 export default component$(() => {
   useStylesScoped$(styles);
-
+  const cart = useContext(CartContext)
+  const totalProducts = cart.value.map((item) => item.count).reduce((x, y) => x+y, 0)
   return (
     <header>
       <div class="logo">
-        <a href="https://qwik.builder.io/" target="_blank" title="qwik">
+        <Link class="link" href="/" title="qwik">
           <QwikLogo />
-        </a>
+        </Link>
       </div>
       <ul>
         <li>
-          <a href="https://qwik.builder.io/docs/components/overview/" target="_blank">
-            Docs
-          </a>
-        </li>
-        <li>
-          <a href="https://qwik.builder.io/examples/introduction/hello-world/" target="_blank">
-            Examples
-          </a>
-        </li>
-        <li>
-          <a href="https://qwik.builder.io/tutorial/welcome/overview/" target="_blank">
-            Tutorials
-          </a>
+          <Link class="link" href="/cart">
+            Cart - {totalProducts}
+          </Link>
         </li>
       </ul>
     </header>

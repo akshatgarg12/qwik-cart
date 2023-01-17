@@ -1,7 +1,5 @@
-import { $, component$, useSignal } from '@builder.io/qwik';
+import { component$} from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import  type { CartCardProps } from '~/components/cart-card/cart-card';
-import Cart from '~/components/cart/cart';
 import type { Item } from '~/components/product/product';
 import { Product } from '~/components/product/product';
 
@@ -32,36 +30,11 @@ export const products : Array<Item> = [
   },
 ]
 export default component$(() => {
-  const cart = useSignal<Array<CartCardProps>>([])
-
-  const ifProductAlreadyInCart = $((id:number) => {
-    return cart.value.filter(({item}) => item.id === id).length
-  })
-  const addToCart = $(async (item:Item) => {
-    if(await ifProductAlreadyInCart(item.id)){
-      const updatedCart = cart.value;
-      updatedCart.forEach((cartObj) => {
-        const cartItem = cartObj.item
-        if(cartItem.id === item.id){
-          cartObj.count += 1
-        }
-      })
-      cart.value = [...updatedCart]
-    }else{
-      const newItem:CartCardProps = {item, count:1}
-      cart.value = [...cart.value, newItem]
-    }
-  })
-
   return (
     <div>
-      <div>
-        <Cart cart = {cart.value} />
-      </div>
-      <hr />
       <div class="container">
           {
-            products.map((item) => <Product key={item.id} item = {item} addToCart = {addToCart} />)
+            products.map((item) => <Product key={item.id} item = {item} />)
           }
       </div>
     </div>
