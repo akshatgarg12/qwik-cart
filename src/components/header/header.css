@@ -4,12 +4,15 @@ header {
   border-bottom: 10px solid var(--qwik-dark-purple);
 }
 
-.link{
-  margin: auto;
-}
 header .logo {
+  margin: auto;
   display: inline-block;
   padding: 10px 10px 7px 20px;
+}
+
+header .logo span {
+  color: black;
+  text-decoration: none;
 }
 
 header ul {
@@ -26,12 +29,12 @@ header li {
   padding: 0;
 }
 
-header li  {
+header li {
   display: inline-block;
   padding: 15px 10px;
   text-decoration: none;
 }
 
-header li a:hover {
-  text-decoration: underline;
+a {
+  text-decoration: none;
 }

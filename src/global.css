@@ -14,18 +14,21 @@
 }
 
 /* styles for product catalogue */
-.container{
+.container {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
 }
 @media (max-width: 600px) {
-  .container { grid-template-columns: auto; }
+  .container {
+    grid-template-columns: auto;
+  }
 }
 
 body {
   background-color: #fafafa;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
   padding: 20px 20px 40px 20px;
 }
 
