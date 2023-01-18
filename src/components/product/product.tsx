@@ -94,18 +94,18 @@ export const Product = component$(({ item }: ProductProps) => {
         <div class="actions">
           <button
             onClick$={async () => {
-              await addToCart(item);
-            }}
-          >
-            +
-          </button>
-          <span>{productCountInCart.value}</span>
-          <button
-            onClick$={async () => {
               await decreaseItemCountInCart(item);
             }}
           >
             -
+          </button>
+            <span>{productCountInCart.value}</span>
+          <button
+            onClick$={async () => {
+              await addToCart(item);
+            }}
+          >
+            +
           </button>
         </div>
       )}
