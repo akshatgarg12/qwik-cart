@@ -2,12 +2,13 @@ import { component$, useContext, useStylesScoped$ } from "@builder.io/qwik";
 import { CartContext } from "~/root";
 import { QwikLogo } from "../icons/qwik";
 import styles from "./header.css?inline";
-// import { Link } from "@builder.io/qwik-city";
 import { CartLogo } from "../icons/cart";
-import { useNavigate } from "@builder.io/qwik-city";
+import { Link, useLocation, useNavigate } from "@builder.io/qwik-city";
 export default component$(() => {
   useStylesScoped$(styles);
   const nav = useNavigate()
+  const loc = useLocation()
+  const isPrefetch = loc.pathname.search('prefetch') !== -1
   const cart = useContext(CartContext);
   const totalProducts = cart.value
     .map((item) => item.count)
@@ -16,28 +17,36 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <button onClick$ = {() => nav.path = '/'}>
-          <QwikLogo />
-        </button>
-        {/* <a href="/" title="qwik">
-          <QwikLogo />
-        </a> */}
+        {
+          isPrefetch ? 
+          <Link prefetch={true} href = "/" title = 'home'>
+            <QwikLogo />
+          </Link>
+          :
+          <button onClick$ = {() => nav.path = '/'}>
+            <QwikLogo />
+          </button>
+        }
       </div>
       <ul>
         <li>
           <div class="logo">
-          <button onClick$ = {() => nav.path = '/cart'}>
+          {
+            isPrefetch ? 
+            <Link prefetch={true} href = "/cart" title = 'cart'>
+              <div>
+                <CartLogo />
+                <span> - {totalProducts}</span>
+              </div>
+            </Link>
+            :
+            <button onClick$ = {() => nav.path = '/cart'}>
               <div>
                 <CartLogo />
                 <span> - {totalProducts}</span>
               </div>
             </button>
-            {/* <a class="link" href="/cart">
-              <div>
-                <CartLogo />
-                <span> - {totalProducts}</span>
-              </div>
-            </a> */}
+          }
           </div>
         </li>
       </ul>
