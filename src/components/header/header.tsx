@@ -15,14 +15,14 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <Link href="/" title="qwik">
+        <Link prefetch={true} href="/" title="qwik">
           <QwikLogo />
         </Link>
       </div>
       <ul>
         <li>
           <div class="logo">
-            <Link class="link" href="/cart">
+            <Link prefetch={true} class="link" href="/cart">
               <div>
                 <CartLogo />
                 <span> - {totalProducts}</span>
