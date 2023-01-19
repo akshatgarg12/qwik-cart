@@ -2,7 +2,7 @@ import { component$, useContext, useStylesScoped$ } from "@builder.io/qwik";
 import { CartContext } from "~/root";
 import { QwikLogo } from "../icons/qwik";
 import styles from "./header.css?inline";
-import { Link } from "@builder.io/qwik-city";
+// import { Link } from "@builder.io/qwik-city";
 import { CartLogo } from "../icons/cart";
 export default component$(() => {
   useStylesScoped$(styles);
@@ -15,19 +15,19 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <Link prefetch={true} href="/" title="qwik">
+        <a href="/" title="qwik">
           <QwikLogo />
-        </Link>
+        </a>
       </div>
       <ul>
         <li>
           <div class="logo">
-            <Link prefetch={true} class="link" href="/cart">
+            <a class="link" href="/cart">
               <div>
                 <CartLogo />
                 <span> - {totalProducts}</span>
               </div>
-            </Link>
+            </a>
           </div>
         </li>
       </ul>
