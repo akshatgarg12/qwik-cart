@@ -4,9 +4,10 @@ import { QwikLogo } from "../icons/qwik";
 import styles from "./header.css?inline";
 // import { Link } from "@builder.io/qwik-city";
 import { CartLogo } from "../icons/cart";
+import { useNavigate } from "@builder.io/qwik-city";
 export default component$(() => {
   useStylesScoped$(styles);
-
+  const nav = useNavigate()
   const cart = useContext(CartContext);
   const totalProducts = cart.value
     .map((item) => item.count)
@@ -15,19 +16,28 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <a href="/" title="qwik">
+        <button onClick$ = {() => nav.path = '/'}>
           <QwikLogo />
-        </a>
+        </button>
+        {/* <a href="/" title="qwik">
+          <QwikLogo />
+        </a> */}
       </div>
       <ul>
         <li>
           <div class="logo">
-            <a class="link" href="/cart">
+          <button onClick$ = {() => nav.path = '/cart'}>
               <div>
                 <CartLogo />
                 <span> - {totalProducts}</span>
               </div>
-            </a>
+            </button>
+            {/* <a class="link" href="/cart">
+              <div>
+                <CartLogo />
+                <span> - {totalProducts}</span>
+              </div>
+            </a> */}
           </div>
         </li>
       </ul>
